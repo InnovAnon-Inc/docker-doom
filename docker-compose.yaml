@@ -1,0 +1,25 @@
+version: '3'
+services:
+  doom:
+    build: .
+    hostname: doom
+    restart: unless-stopped
+    volumes:
+      - ./iwad/freedm.wad:/home/zandronum/.config/zandronum/freedm.wad:ro
+      - ./player/whitelist.txt:/home/zandronum/player/whitelist.txt:ro
+      - ./player/adminlist.txt:/home/zandronum/player/adminlist.txt:ro
+      - ./config/default.cfg:/home/zandronum/config/default.cfg:ro
+      - doom-logs:/home/zandronum/log/:rw
+    ports:
+      - 10666:10666
+    networks:
+      - doom-net
+
+volumes:
+  doom-logs:
+
+networks:
+  doom-net:
+    ipam:
+      config:
+      - subnet: 192.168.66.0/24
