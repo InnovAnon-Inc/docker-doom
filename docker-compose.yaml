@@ -5,8 +5,10 @@ services:
     hostname: doom
     restart: unless-stopped
     volumes:
-      - ./iwad/freedm.wad:/home/zandronum/.config/zandronum/freedm.wad:ro
+      - ./iwad/freedoom2.wad:/home/zandronum/.config/zandronum/freedoom2.wad:ro
+      - abaddonvol:/home/zandronum/abaddon:ro
       - ./player/whitelist.txt:/home/zandronum/player/whitelist.txt:ro
+      - ./player/banlist.txt:/home/zandronum/player/banlist.txt:rw
       - ./player/adminlist.txt:/home/zandronum/player/adminlist.txt:ro
       - ./config/default.cfg:/home/zandronum/config/default.cfg:ro
       - doom-logs:/home/zandronum/log/:rw
@@ -17,6 +19,8 @@ services:
 
 volumes:
   doom-logs:
+  abaddonvol:
+    external: true
 
 networks:
   doom-net:
