@@ -2,6 +2,18 @@
 
 A Zandronum server configuration and deployment tool utilizing a Docker-based back-end.
 
+## New Usage
+
+`(git clone --depth=1 {https://github.com/InnovAnon-Inc,..}/poobuntu.git && cd ../poobuntu && ./run.sh 18.04 && ./run.sh 16.04)`
+
+`(git clone --depth=1 {https://github.com/InnovAnon-Inc,..}/Abaddon.git  && cd ../Abaddon  && ./run.sh)`
+
+`./run.sh`
+
+## N.B.,
+
+Abaddon's generated maps aren't working for some reason... typical.
+
 ## Usage
 
 1. Install Docker
