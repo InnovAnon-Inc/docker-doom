@@ -8,6 +8,10 @@ RUN apt-add-repository 'deb http://debian.drdteam.org stable multiverse'
 RUN apt-fast update
 RUN apt-fast install --yes --quiet libssl1.0.0 libsdl-image1.2 zandronum
 
+ARG MODE
+ENV MODE ${MODE}
+RUN [ ${MODE} != client ] || apt-fast install --yes libgtk2.0-0
+
 RUN ./poobuntu-clean.sh
 RUN rm -v poobuntu-clean.sh
 
@@ -26,6 +30,8 @@ WORKDIR /home/zandronum
 
 RUN mkdir -vp .config/zandronum
 
-CMD        ["/home/zandronum/bin/summon.sh"]
-ENTRYPOINT ["/home/zandronum/bin/summon.sh"]
+#CMD        ["/home/zandronum/bin/summon.sh", ${MODE}]
+#ENTRYPOINT ["/home/zandronum/bin/summon.sh", ${MODE}]
+CMD        /home/zandronum/bin/summon.sh ${MODE}
+ENTRYPOINT /home/zandronum/bin/summon.sh ${MODE}
 EXPOSE 10666

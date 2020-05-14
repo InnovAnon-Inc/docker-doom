@@ -1,7 +1,11 @@
 version: '3'
 services:
   doom:
-    build: .
+    #build: .
+    build:
+      context: .
+      args:
+        - MODE=server
     hostname: doom
     restart: unless-stopped
     volumes:
@@ -14,6 +18,20 @@ services:
       - doom-logs:/home/zandronum/log/:rw
     ports:
       - 10666:10666
+    networks:
+      - doom-net
+
+  doom-client:
+    build:
+      context: .
+      args:
+        - MODE=client
+    hostname: doom-client
+    volumes:
+      - ./iwad/freedoom2.wad:/home/zandronum/.config/zandronum/freedoom2.wad:ro
+      - abaddonvol:/home/zandronum/abaddon:ro
+      - ./config/default.cfg:/home/zandronum/config/default.cfg:ro
+      - doom-logs:/home/zandronum/log/:rw
     networks:
       - doom-net
 

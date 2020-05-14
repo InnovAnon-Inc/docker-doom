@@ -1,5 +1,11 @@
 #! /bin/bash
 set -exu
+[ $# -eq 1 ]
+if [ $1 == server ] ; then
+  ZANDRONUM='zandronum-server -host'
+else
+  ZANDRONUM=zandronum
+fi
 
 DIR=/home/zandronum/abaddon/wads
 # https://stackoverflow.com/questions/1015678/get-most-recent-file-in-a-directory-on-linux
@@ -10,10 +16,8 @@ else
   FILE=
 fi
 
-zandronum-server \
-  -host \
+$ZANDRONUM \
   -port 10666 \
   -waddir /home/zandronum/abaddon/wads \
   $FILE \
   +exec "/home/zandronum/config/default.cfg"
-
