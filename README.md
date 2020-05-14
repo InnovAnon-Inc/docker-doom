@@ -4,9 +4,9 @@ A Zandronum server configuration and deployment tool utilizing a Docker-based ba
 
 ## New Usage
 
-`(git clone --depth=1 {https://github.com/InnovAnon-Inc,..}/poobuntu.git && cd ../poobuntu && ./run.sh 18.04 && ./run.sh 16.04)`
+`(git clone --depth=1 {https://github.com/InnovAnon-Inc,..}/poobuntu && cd ../poobuntu && ./run.sh 18.04 && ./run.sh 16.04)`
 
-`(git clone --depth=1 {https://github.com/InnovAnon-Inc,..}/Abaddon.git  && cd ../Abaddon  && ./run.sh)`
+`(git clone --depth=1 {https://github.com/InnovAnon-Inc,..}/Abaddon  && cd ../Abaddon  && ./run.sh)`
 
 `./run.sh`
 
