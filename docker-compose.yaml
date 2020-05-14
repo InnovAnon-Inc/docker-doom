@@ -34,6 +34,8 @@ services:
       - doom-logs:/home/zandronum/log/:rw
     networks:
       - doom-net
+    environment:
+      - DISPLAY=${DISPLAY}
 
 volumes:
   doom-logs:

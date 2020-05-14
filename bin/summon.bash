@@ -2,9 +2,9 @@
 set -exu
 [ $# -eq 1 ]
 if [ $1 == server ] ; then
-  ZANDRONUM='zandronum-server -host'
+  ZANDRONUM='zandronum-server -host -port 106666'
 else
-  ZANDRONUM=zandronum
+  ZANDRONUM='zandronum localhost:10666'
 fi
 
 DIR=/home/zandronum/abaddon/wads
@@ -15,9 +15,13 @@ if ((${#files[@]} > 0)) ; then
 else
   FILE=
 fi
+# TODO fix Abaddon or docker-doom
+#      or whatever is breaking the awesome generated maps :'(
+FILE=
 
 $ZANDRONUM \
-  -port 10666 \
   -waddir /home/zandronum/abaddon/wads \
+  -file /home/zandronum/.config/zandronum/project_brutality.pk3 \
   $FILE \
   +exec "/home/zandronum/config/default.cfg"
+
