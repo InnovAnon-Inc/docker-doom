@@ -1,10 +1,10 @@
 #! /bin/bash
 set -exu
-[ $# -eq 1 ]
+[ $# -eq 2 ]
 if [ $1 == server ] ; then
-  ZANDRONUM='zandronum-server -host -port 106666'
+  ZANDRONUM="$2-server -host -port 106666"
 else
-  ZANDRONUM='zandronum localhost:10666'
+  ZANDRONUM="$2 localhost:10666"
 fi
 
 DIR=/home/zandronum/abaddon/wads
@@ -21,7 +21,7 @@ FILE=
 
 $ZANDRONUM \
   -waddir /home/zandronum/abaddon/wads \
-  -file /home/zandronum/.config/zandronum/project_brutality.pk3 \
+  -file /home/zandronum/.config/$2/project_brutality.pk3 \
   $FILE \
   +exec "/home/zandronum/config/default.cfg"
 

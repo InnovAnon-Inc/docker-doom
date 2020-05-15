@@ -6,11 +6,14 @@ RUN apt-fast install -y wget
 RUN wget -O - http://debian.drdteam.org/drdteam.gpg | apt-key add -
 RUN apt-add-repository 'deb http://debian.drdteam.org stable multiverse'
 RUN apt-fast update
-RUN apt-fast install --yes --quiet libssl1.0.0 libsdl-image1.2 zandronum
+ARG SERVER
+ENV SERVER ${SERVER}
+#RUN apt-fast install --yes --quiet libssl1.0.0 libsdl-image1.2 zandronum
+RUN apt-fast install --yes --quiet doomsday-server doomsday
 
 ARG MODE
 ENV MODE ${MODE}
-RUN [ ${MODE} != client ] || apt-fast install --yes libgtk2.0-0 libglu1-mesa
+#RUN [ ${MODE} != client ] || apt-fast install --yes libgtk2.0-0 libglu1-mesa
 #libsdl1.2debian libglew1.5
 
 RUN ./poobuntu-clean.sh
@@ -20,8 +23,8 @@ RUN rm -v poobuntu-clean.sh
 RUN useradd -ms /bin/bash zandronum
 
 # brutalize
-RUN mkdir -vp /home/zandronum/.config/zandronum
-RUN wget -O   /home/zandronum/.config/zandronum/project_brutality.pk3 https://github.com/pa1nki113r/Project_Brutality/archive/master.zip
+RUN mkdir -vp /home/zandronum/.config/${SERVER}
+RUN wget -O   /home/zandronum/.config/${SERVER}/project_brutality.pk3 https://github.com/pa1nki113r/Project_Brutality/archive/master.zip
 
 # Add start-up script
 COPY ./bin/GeoIP.dat   /home/zandronum/GeoIP.dat
@@ -35,6 +38,6 @@ WORKDIR /home/zandronum
 
 #CMD        ["/home/zandronum/bin/summon.sh", ${MODE}]
 #ENTRYPOINT ["/home/zandronum/bin/summon.sh", ${MODE}]
-CMD        /home/zandronum/bin/summon.sh ${MODE}
-ENTRYPOINT /home/zandronum/bin/summon.sh ${MODE}
+CMD        /home/zandronum/bin/summon.sh ${MODE} ${SERVER}
+ENTRYPOINT /home/zandronum/bin/summon.sh ${MODE} ${SERVER}
 EXPOSE 10666

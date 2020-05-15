@@ -6,10 +6,11 @@ services:
       context: .
       args:
         - MODE=server
+        - SERVER=doomsday
     hostname: doom
     restart: unless-stopped
     volumes:
-      - ./iwad/freedoom2.wad:/home/zandronum/.config/zandronum/freedoom2.wad:ro
+      - ./iwad/freedoom2.wad:/home/zandronum/.config/${SERVER}/freedoom2.wad:ro
       - abaddonvol:/home/zandronum/abaddon:ro
       - ./player/whitelist.txt:/home/zandronum/player/whitelist.txt:ro
       - ./player/banlist.txt:/home/zandronum/player/banlist.txt:rw
@@ -20,15 +21,18 @@ services:
       - 10666:10666
     networks:
       - doom-net
+    environment:
+      - SERVER=${SERVER}
 
   doom-client:
     build:
       context: .
       args:
         - MODE=client
+        - SERVER=doomsday
     hostname: doom-client
     volumes:
-      - ./iwad/freedoom2.wad:/home/zandronum/.config/zandronum/freedoom2.wad:ro
+      - ./iwad/freedoom2.wad:/home/zandronum/.config/${SERVER}/freedoom2.wad:ro
       - abaddonvol:/home/zandronum/abaddon:ro
       - ./config/default.cfg:/home/zandronum/config/default.cfg:ro
       - doom-logs:/home/zandronum/log/:rw
@@ -36,6 +40,7 @@ services:
       - doom-net
     environment:
       - DISPLAY=${DISPLAY}
+      - SERVER=${SERVER}
 
 volumes:
   doom-logs:
