@@ -1,6 +1,7 @@
 #! /bin/bash
 set -exu
 [ $# -eq 2 ]
+PATH=/usr/games:$PATH
 if [ $1 == server ] ; then
   ZANDRONUM="$2-server -host -port 106666"
 else

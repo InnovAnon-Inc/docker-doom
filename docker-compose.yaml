@@ -21,8 +21,6 @@ services:
       - 10666:10666
     networks:
       - doom-net
-    environment:
-      - SERVER=${SERVER}
 
   doom-client:
     build:
@@ -36,11 +34,11 @@ services:
       - abaddonvol:/home/zandronum/abaddon:ro
       - ./config/default.cfg:/home/zandronum/config/default.cfg:ro
       - doom-logs:/home/zandronum/log/:rw
-    networks:
-      - doom-net
+    #networks:
+    #  - doom-net
+    network_mode: "host"
     environment:
       - DISPLAY=${DISPLAY}
-      - SERVER=${SERVER}
 
 volumes:
   doom-logs:
