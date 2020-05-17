@@ -1,5 +1,6 @@
 #FROM ubuntu:16.04
 FROM poobuntu-16.04:latest
+MAINTAINER Innovations Anonymous <InnovAnon-Inc@protonmail.com>
 
 # Install required software
 RUN apt-fast install -y wget
