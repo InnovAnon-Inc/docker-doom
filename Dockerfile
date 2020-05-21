@@ -29,7 +29,6 @@ ENV MODE ${MODE}
 #libsdl1.2debian libglew1.5
 
 RUN ./poobuntu-clean.sh
-RUN rm -v poobuntu-clean.sh
 
 # Create a non-privileged user
 RUN useradd -ms /bin/bash zandronum
