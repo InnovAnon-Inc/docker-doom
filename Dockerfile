@@ -1,9 +1,20 @@
 #FROM ubuntu:16.04
-FROM poobuntu-16.04:latest
+FROM innovanon/poobuntu-16.04:latest
 MAINTAINER Innovations Anonymous <InnovAnon-Inc@protonmail.com>
 
+LABEL version="1.0"
+LABEL maintainer="Innovations Anonymous <InnovAnon-Inc@protonmail.com>"
+LABEL about="docker doom server and client"
+LABEL org.label-schema.build-date=$BUILD_DATE
+LABEL org.label-schema.license="PDL (Public Domain License)"
+LABEL org.label-schema.name="docker-doom"
+LABEL org.label-schema.url="InnovAnon-Inc.github.io/docker-doom"
+LABEL org.label-schema.vcs-ref=$VCS_REF
+LABEL org.label-schema.vcs-type="Git"
+LABEL org.label-schema.vcs-url="https://github.com/InnovAnon-Inc/docker-doom"
+
 # Install required software
-RUN apt-fast install -y wget
+RUN apt-fast install -qy wget
 RUN wget -O - http://debian.drdteam.org/drdteam.gpg | apt-key add -
 RUN apt-add-repository 'deb http://debian.drdteam.org stable multiverse'
 RUN apt-fast update
