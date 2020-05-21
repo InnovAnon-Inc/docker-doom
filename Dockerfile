@@ -14,14 +14,14 @@ LABEL org.label-schema.vcs-type="Git"
 LABEL org.label-schema.vcs-url="https://github.com/InnovAnon-Inc/docker-doom"
 
 # Install required software
-RUN apt-fast install -qy wget
+RUN apt-fast install wget
 RUN wget -O - http://debian.drdteam.org/drdteam.gpg | apt-key add -
 RUN apt-add-repository 'deb http://debian.drdteam.org stable multiverse'
 RUN apt-fast update
 ARG SERVER
 ENV SERVER ${SERVER}
 #RUN apt-fast install --yes --quiet libssl1.0.0 libsdl-image1.2 zandronum
-RUN apt-fast install --yes --quiet doomsday-server doomsday
+RUN apt-fast install doomsday-server doomsday
 
 ARG MODE
 ENV MODE ${MODE}
