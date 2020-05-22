@@ -52,4 +52,4 @@ WORKDIR /home/zandronum
 #ENTRYPOINT ["/home/zandronum/bin/summon.sh", ${MODE}]
 CMD        /home/zandronum/bin/summon.sh ${MODE} ${SERVER}
 ENTRYPOINT /home/zandronum/bin/summon.sh ${MODE} ${SERVER}
-EXPOSE 10666
+EXPOSE 10666/tcp
