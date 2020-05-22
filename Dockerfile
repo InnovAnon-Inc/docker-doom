@@ -1,6 +1,6 @@
 #FROM ubuntu:16.04
-#FROM innovanon/poobuntu-16.04:latest
-FROM innovanon/poobuntu:16.04
+FROM innovanon/poobuntu-16.04:latest
+#FROM innovanon/poobuntu:16.04
 MAINTAINER Innovations Anonymous <InnovAnon-Inc@protonmail.com>
 
 LABEL version="1.0"
