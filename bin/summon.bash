@@ -2,13 +2,14 @@
 set -exu
 [ $# -eq 2 ]
 PATH=/usr/games:$PATH
-if [ $1 == server ] ; then
+if   [ $1 = server ] ; then
   ZANDRONUM="$2-server -host -port 106666"
-else
+elif [ $1 = client ] ; then
   ZANDRONUM="$2 localhost:10666"
-fi
+else exit 2 ; fi
 
 DIR=/home/zandronum/abaddon/wads
+
 # https://stackoverflow.com/questions/1015678/get-most-recent-file-in-a-directory-on-linux
 eval "files=($(ls -t --quoting-style=shell-always $DIR))"
 if ((${#files[@]} > 0)) ; then
@@ -18,11 +19,11 @@ else
 fi
 # TODO fix Abaddon or docker-doom
 #      or whatever is breaking the awesome generated maps :'(
-FILE=
 
-$ZANDRONUM \
-  -waddir /home/zandronum/abaddon/wads \
-  -file /home/zandronum/.config/$2/project_brutality.pk3 \
-  $FILE \
+$ZANDRONUM                                         \
+  -iwad /home/zandronum/wads/freedoom2.wad         \
+  -waddir /home/zandronum/abaddon/wads             \
+  $FILE                                            \
+  -file /home/zandronum/wads/Project_Brutality.pk3 \
   +exec "/home/zandronum/config/default.cfg"
 

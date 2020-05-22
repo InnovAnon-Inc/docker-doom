@@ -10,8 +10,9 @@ services:
     hostname: doom
     restart: unless-stopped
     volumes:
-      - ./iwad/freedoom2.wad:/home/zandronum/.config/${SERVER}/freedoom2.wad:ro
+      #- ./iwad/freedoom2.wad:/home/zandronum/.config/zandronum/freedoom2.wad:ro
       - abaddonvol:/home/zandronum/abaddon:ro
+      - wadsvol:/home/zandronum/wads:ro
       - ./player/whitelist.txt:/home/zandronum/player/whitelist.txt:ro
       - ./player/banlist.txt:/home/zandronum/player/banlist.txt:rw
       - ./player/adminlist.txt:/home/zandronum/player/adminlist.txt:ro
@@ -30,10 +31,14 @@ services:
         - SERVER=doomsday
     hostname: doom-client
     volumes:
-      - ./iwad/freedoom2.wad:/home/zandronum/.config/${SERVER}/freedoom2.wad:ro
+      #- ./iwad/freedoom2.wad:/home/zandronum/.config/zandronum/freedoom2.wad:ro
       - abaddonvol:/home/zandronum/abaddon:ro
+      - wadsvol:/home/zandronum/wads:ro
       - ./config/default.cfg:/home/zandronum/config/default.cfg:ro
       - doom-logs:/home/zandronum/log/:rw
+    devices:
+      #- "/dev/snd/by-path/pci-0000{{:}}00{{:}}1b.0:/dev/snd"
+      - "/dev/snd/by-path/pci-0000:00:1b.0":"/dev/snd"
     #networks:
     #  - doom-net
     network_mode: "host"
@@ -44,9 +49,12 @@ volumes:
   doom-logs:
   abaddonvol:
     external: true
+  wadsvol:
+    external: true
 
 networks:
   doom-net:
     ipam:
       config:
       - subnet: 192.168.66.0/24
+
