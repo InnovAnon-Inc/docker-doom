@@ -6,7 +6,7 @@ services:
       context: .
       args:
         - MODE=server
-        - SERVER=doomsday
+        - SERVER=zandronum
     hostname: doom
     restart: unless-stopped
     volumes:
@@ -29,7 +29,7 @@ services:
       context: .
       args:
         - MODE=client
-        - SERVER=doomsday
+        - SERVER=zandronum
     hostname: doom-client
     volumes:
       #- ./iwad/freedoom2.wad:/home/zandronum/.config/zandronum/freedoom2.wad:ro
