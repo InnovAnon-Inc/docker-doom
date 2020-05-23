@@ -3,9 +3,9 @@ set -exu
 [ $# -eq 2 ]
 PATH=/usr/games:$PATH
 if   [ $1 = server ] ; then
-  ZANDRONUM="$2-server -host -port 106666"
+  ZANDRONUM="$2-server -host -port 10667"
 elif [ $1 = client ] ; then
-  ZANDRONUM="$2 localhost:10666"
+  ZANDRONUM="$2 localhost:10667"
 else exit 2 ; fi
 
 DIR=/home/zandronum/abaddon/wads
@@ -23,7 +23,7 @@ fi
 $ZANDRONUM                                         \
   -iwad /home/zandronum/wads/freedoom2.wad         \
   -waddir /home/zandronum/abaddon/wads             \
-  $FILE                                            \
   -file /home/zandronum/wads/Project_Brutality.pk3 \
+  $FILE                                            \
   +exec "/home/zandronum/config/default.cfg"
 

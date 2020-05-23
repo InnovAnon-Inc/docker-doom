@@ -19,9 +19,9 @@ services:
       - ./config/default.cfg:/home/zandronum/config/default.cfg:ro
       - doom-logs:/home/zandronum/log/:rw
     ports:
-      - 10666:10666
+      - 10667:10667
     networks:
-      - doom-net
+      - zandro-net
 
   doom-client:
     privileged: true
@@ -47,9 +47,19 @@ services:
       #- "/dev/snd/by-path/pci-0000&#58;00&#58;1b.0:/dev/snd"
       #- "./snd:/dev/snd"
       #- /dev/snd/by-path/pci-0000::00::1f.3:/dev/snd
+      # old
       - "/dev/snd/controlC0:/dev/snd"
+      # new
+      #- "/dev/snd/controlC0:/dev/snd/controlC0"
+      #- "/dev/snd/hwC0D0:/dev/snd/hwC0D0"
+      #- "/dev/snd/pcmC0D0c:/dev/snd/pcmC0D0c"
+      #- "/dev/snd/pcmC0D0p:/dev/snd/pcmC0D0p"
+      #- "/dev/snd/pcmC0D2c:/dev/snd/pcmC0D2c"
+      #- "/dev/snd/pcmC0D2p:/dev/snd/pcmC0D2p"
+      #- "/dev/snd/seq:/dev/snd/seq"
+      #- "/dev/snd/timer:/dev/snd/timer"
     #networks:
-    #  - doom-net
+    #  - zandro-net
     network_mode: "host"
     environment:
       - DISPLAY=${DISPLAY}
@@ -62,8 +72,8 @@ volumes:
     external: true
 
 networks:
-  doom-net:
+  zandro-net:
     ipam:
       config:
-      - subnet: 192.168.67.0/24
+      - subnet: 192.168.166.0/24
 

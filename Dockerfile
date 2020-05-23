@@ -1,7 +1,7 @@
-#FROM ubuntu:16.04
 #FROM innovanon/poobuntu-16.04:latest
-#FROM innovanon/poobuntu:16.04
-FROM innovanon/poobuntu:latest
+FROM innovanon/poobuntu-18.04:latest
+# missing libcrypto.so.1.0.0 from libssl.1.0.0 ?
+#FROM innovanon/poobuntu:latest
 MAINTAINER Innovations Anonymous <InnovAnon-Inc@protonmail.com>
 
 LABEL version="1.0"
@@ -50,7 +50,9 @@ RUN mkdir -vp /home/zandronum/.config/zandronum
 #RUN wget -O   /home/zandronum/.config/zandronum/project_brutality.pk3 https://github.com/pa1nki113r/Project_Brutality/archive/master.zip
 
 # TODO uncomment
-#RUN ./poobuntu-clean.sh
+# new
+#RUN apt-fast install libfluidsynth1 fluid-soundfont-gm fluid-soundfont-gs
+RUN ./poobuntu-clean.sh
 
 # Add start-up script
 COPY ./bin/GeoIP.dat   /home/zandronum/GeoIP.dat
@@ -66,4 +68,5 @@ WORKDIR /home/zandronum
 #ENTRYPOINT ["/home/zandronum/bin/summon.sh", ${MODE}]
 CMD        /home/zandronum/bin/summon.sh ${MODE} zandronum
 ENTRYPOINT /home/zandronum/bin/summon.sh ${MODE} zandronum
-EXPOSE 10666/tcp
+EXPOSE 10667/tcp
+
