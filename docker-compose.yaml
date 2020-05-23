@@ -1,13 +1,13 @@
 version: '3'
 services:
-  doom:
+  zandronum-server:
     #build: .
     build:
       context: .
       args:
         - MODE=server
         - SERVER=zandronum
-    hostname: doom
+    hostname: zandronum-server
     restart: unless-stopped
     volumes:
       #- ./iwad/freedoom2.wad:/home/zandronum/.config/zandronum/freedoom2.wad:ro
@@ -23,14 +23,14 @@ services:
     networks:
       - zandro-net
 
-  doom-client:
+  zandronum-client:
     privileged: true
     build:
       context: .
       args:
         - MODE=client
         - SERVER=zandronum
-    hostname: doom-client
+    hostname: zandronum-client
     volumes:
       #- ./iwad/freedoom2.wad:/home/zandronum/.config/zandronum/freedoom2.wad:ro
       - abaddonvol:/home/zandronum/abaddon:ro
@@ -58,9 +58,9 @@ services:
       #- "/dev/snd/pcmC0D2p:/dev/snd/pcmC0D2p"
       #- "/dev/snd/seq:/dev/snd/seq"
       #- "/dev/snd/timer:/dev/snd/timer"
-    #networks:
-    #  - zandro-net
-    network_mode: "host"
+    networks:
+      - zandro-net
+    #network_mode: "host"
     environment:
       - DISPLAY=${DISPLAY}
 

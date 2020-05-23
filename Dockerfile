@@ -52,7 +52,7 @@ RUN mkdir -vp /home/zandronum/.config/zandronum
 # TODO uncomment
 # new
 #RUN apt-fast install libfluidsynth1 fluid-soundfont-gm fluid-soundfont-gs
-RUN ./poobuntu-clean.sh
+#RUN ./poobuntu-clean.sh
 
 # Add start-up script
 COPY ./bin/GeoIP.dat   /home/zandronum/GeoIP.dat
