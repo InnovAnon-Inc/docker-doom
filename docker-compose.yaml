@@ -58,9 +58,10 @@ services:
       #- "/dev/snd/pcmC0D2p:/dev/snd/pcmC0D2p"
       #- "/dev/snd/seq:/dev/snd/seq"
       #- "/dev/snd/timer:/dev/snd/timer"
-    networks:
-      - zandro-net
-    #network_mode: "host"
+    # TODO segfault Address: 0x38
+    #networks:
+    #  - zandro-net
+    network_mode: "host"
     environment:
       - DISPLAY=${DISPLAY}
 
