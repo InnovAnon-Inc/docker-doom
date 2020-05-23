@@ -19,7 +19,7 @@ services:
       - ./config/default.cfg:/home/zandronum/config/default.cfg:ro
       - doom-logs:/home/zandronum/log/:rw
     ports:
-      - 10667:10667
+      - 10667:10667/udp
     networks:
       - zandro-net
 
@@ -37,8 +37,11 @@ services:
       - wadsvol:/home/zandronum/wads:ro
       - ./config/default.cfg:/home/zandronum/config/default.cfg:ro
       - doom-logs:/home/zandronum/log/:rw
+      # TODO
       #- /tmp/.X11-unix:/tmp/.X11-unix:ro 
       #- /etc/localtime:/etc/localtime:ro
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw 
+      - /etc/localtime:/etc/localtime:rw
     devices:
       #- "/dev/snd/by-path/pci-0000{{:}}00{{:}}1b.0:/dev/snd"
       #- "/dev/snd/by-path/pci-0000:00:1b.0":"/dev/snd"
@@ -50,20 +53,20 @@ services:
       #- "./snd:/dev/snd"
       #- /dev/snd/by-path/pci-0000::00::1f.3:/dev/snd
       # old
-      - "/dev/snd/controlC0:/dev/snd"
+      #- "/dev/snd/controlC0:/dev/snd"
       # new
-      #- "/dev/snd/controlC0:/dev/snd/controlC0"
-      #- "/dev/snd/hwC0D0:/dev/snd/hwC0D0"
-      #- "/dev/snd/pcmC0D0c:/dev/snd/pcmC0D0c"
-      #- "/dev/snd/pcmC0D0p:/dev/snd/pcmC0D0p"
-      #- "/dev/snd/pcmC0D2c:/dev/snd/pcmC0D2c"
-      #- "/dev/snd/pcmC0D2p:/dev/snd/pcmC0D2p"
-      #- "/dev/snd/seq:/dev/snd/seq"
-      #- "/dev/snd/timer:/dev/snd/timer"
+      - "/dev/snd/controlC0:/dev/snd/controlC0"
+      - "/dev/snd/hwC0D0:/dev/snd/hwC0D0"
+      - "/dev/snd/pcmC0D0c:/dev/snd/pcmC0D0c"
+      - "/dev/snd/pcmC0D0p:/dev/snd/pcmC0D0p"
+      - "/dev/snd/pcmC0D2c:/dev/snd/pcmC0D2c"
+      - "/dev/snd/pcmC0D2p:/dev/snd/pcmC0D2p"
+      - "/dev/snd/seq:/dev/snd/seq"
+      - "/dev/snd/timer:/dev/snd/timer"
     # TODO segfault Address: 0x38
-    #networks:
-    #  - zandro-net
-    network_mode: "host"
+    networks:
+      - zandro-net
+    #network_mode: "host"
     environment:
       - DISPLAY=${DISPLAY}
 

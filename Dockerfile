@@ -35,9 +35,8 @@ elif   [ "${MODE}" = client ] ; then  \
     libcanberra-gtk-module          ; \
 else exit 2                         ; \
 fi
-
-#RUN [ ${MODE} != client ] || apt-fast install --yes libgtk2.0-0 libglu1-mesa
-#libsdl1.2debian libglew1.5
+  # TODO test last 2 pkgs
+#    libsdl1.2debian libglew1.5
 
 #RUN [ ${MODE} = server ] || [ ${MODE} = client ]
 
@@ -50,7 +49,6 @@ RUN [ "${MODE}" != client ] || usermod -a -G video zandronum
 RUN mkdir -vp /home/zandronum/.config/zandronum
 #RUN wget -O   /home/zandronum/.config/zandronum/project_brutality.pk3 https://github.com/pa1nki113r/Project_Brutality/archive/master.zip
 
-# TODO uncomment
 # new
 #RUN apt-fast install libfluidsynth1 fluid-soundfont-gm fluid-soundfont-gs
 RUN ./poobuntu-clean.sh
@@ -69,5 +67,5 @@ WORKDIR /home/zandronum
 #ENTRYPOINT ["/home/zandronum/bin/summon.sh", ${MODE}]
 CMD        /home/zandronum/bin/summon.sh ${MODE} zandronum
 ENTRYPOINT /home/zandronum/bin/summon.sh ${MODE} zandronum
-EXPOSE 10667/tcp
+EXPOSE 10667/udp
 

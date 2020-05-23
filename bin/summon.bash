@@ -17,8 +17,6 @@ if ((${#files[@]} > 0)) ; then
 else
   FILE=
 fi
-# TODO fix Abaddon or docker-doom
-#      or whatever is breaking the awesome generated maps :'(
 
 $ZANDRONUM                                         \
   -iwad /home/zandronum/wads/freedoom2.wad         \
