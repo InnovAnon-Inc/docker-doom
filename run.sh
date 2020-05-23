@@ -7,7 +7,7 @@ nice -n +20      -- \
 sudo -u `whoami` -- \
 docker-compose build
 
-docker push innovanon/docker-doom:latest || :
+docker push innovanon/docker-zandronum:latest || :
 
 sudo             -- \
 nice -n -20      -- \
