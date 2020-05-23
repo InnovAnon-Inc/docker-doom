@@ -9,6 +9,8 @@ docker-compose build
 
 docker push innovanon/docker-doom:latest || :
 
+trap 'docker-compose down' 0
+
 sudo             -- \
 nice -n -20      -- \
 sudo -u `whoami` -- \

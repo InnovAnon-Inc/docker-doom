@@ -1,29 +1,33 @@
 #! /bin/bash
 set -exu
-[ $# -eq 2 ]
-PATH=/usr/games:$PATH
-if   [ $1 = server ] ; then
-  ZANDRONUM="$2-server -host -port 106666"
-elif [ $1 = client ] ; then
-  ZANDRONUM="$2 localhost:10666"
-else exit 2 ; fi
+
+ZANDRONUM="$PWD/zserv -host -port 106666"
 
 DIR=/home/zandronum/abaddon/wads
 
 # https://stackoverflow.com/questions/1015678/get-most-recent-file-in-a-directory-on-linux
 eval "files=($(ls -t --quoting-style=shell-always $DIR))"
 if ((${#files[@]} > 0)) ; then
-  FILE="-file $DIR/`printf '%s\n' "${files[0]}"`"
+  FILE="`printf '%s\n' "${files[0]}"`"
+  cp -v /home/zandronum/abaddon/wads/$FILE .
+  FILE="-file $FILE"
 else
   FILE=
 fi
 # TODO fix Abaddon or docker-doom
 #      or whatever is breaking the awesome generated maps :'(
 
-$ZANDRONUM                                         \
-  -iwad /home/zandronum/wads/freedoom2.wad         \
-  -waddir /home/zandronum/abaddon/wads             \
-  $FILE                                            \
-  -file /home/zandronum/wads/Project_Brutality.pk3 \
-  +exec "/home/zandronum/config/default.cfg"
+cp -v /home/zandronum/wads/freedoom2.wad doom2.wad
+cp -v /home/zandronum/wads/Project_Brutality.pk3 \
+      /home/zandronum/config/bots.cfg            \
+      /home/zandronum/config/zserv.cfg           .
+$ZANDRONUM                    \
+  -iwad doom2.wad             \
+  -waddir $PWD                \
+  -file Project_Brutality.pk3 \
+  $FILE                       \
+
+#  -file zdaemon.wad           \
+#  -config bots.cfg            \
+#  -config zserv.cfg
 

@@ -29,17 +29,15 @@ LABEL org.label-schema.vcs-url="https://github.com/InnovAnon-Inc/docker-doom"
 RUN dpkg --add-architecture i386
 RUN apt update
 RUN apt install libc6-i386 libstdc++6:i386
-RUN wget -qO- http://downloads.zdaemon.org/zserv11012_linux26.tgz | tar xf zdaemon
-RUN ls zdaemon
-RUN exit 2
+RUN wget -qO- http://downloads.zdaemon.org/zserv11012_linux26.tgz | tar xzf -
 
-RUN if [ "${MODE}" = server ] ; then  \
-  apt-fast install zandronum-server ; \
-elif   [ "${MODE}" = client ] ; then  \
-  apt-fast install zandronum          \
-    libgtk2.0-0 libglu1-mesa        ; \
-else exit 2                         ; \
-fi
+#RUN if [ "${MODE}" = server ] ; then  \
+#  apt-fast install zandronum-server ; \
+#elif   [ "${MODE}" = client ] ; then  \
+#  apt-fast install zandronum          \
+#    libgtk2.0-0 libglu1-mesa        ; \
+#else exit 2                         ; \
+#fi
 
 #RUN [ ${MODE} != client ] || apt-fast install --yes libgtk2.0-0 libglu1-mesa
 #libsdl1.2debian libglew1.5
@@ -48,17 +46,19 @@ fi
 
 # Create a non-privileged user
 RUN useradd -ms /bin/bash zandronum
-RUN usermod -a -G audio   zandronum
+RUN [ "${MODE}" != client ] || usermod -a -G audio zandronum
+
+RUN mv -v  zserv110_bin/zserv zserv110_bin/zdaemon.wad /home/zandronum/
+RUN rm -rf zserv110_bin
 
 # brutalize
-RUN mkdir -vp /home/zandronum/.config/zandronum
+#RUN mkdir -vp /home/zandronum/.config/zandronum
 #RUN wget -O   /home/zandronum/.config/zandronum/project_brutality.pk3 https://github.com/pa1nki113r/Project_Brutality/archive/master.zip
 
-# TODO uncomment
-#RUN ./poobuntu-clean.sh
+RUN ./poobuntu-clean.sh
 
 # Add start-up script
-COPY ./bin/GeoIP.dat   /home/zandronum/GeoIP.dat
+#COPY ./bin/GeoIP.dat   /home/zandronum/GeoIP.dat
 COPY ./bin/summon.bash /home/zandronum/bin/summon.sh
 
 RUN chown -vR zandronum /home/zandronum/bin
@@ -69,6 +69,7 @@ WORKDIR /home/zandronum
 
 #CMD        ["/home/zandronum/bin/summon.sh", ${MODE}]
 #ENTRYPOINT ["/home/zandronum/bin/summon.sh", ${MODE}]
-CMD        /home/zandronum/bin/summon.sh ${MODE} zandronum
-ENTRYPOINT /home/zandronum/bin/summon.sh ${MODE} zandronum
+#CMD        /home/zandronum/bin/summon.sh
+ENTRYPOINT ["/home/zandronum/bin/summon.sh"]
 EXPOSE 10666/tcp
+
