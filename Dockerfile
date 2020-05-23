@@ -18,7 +18,7 @@ LABEL org.label-schema.vcs-url="https://github.com/InnovAnon-Inc/docker-doom"
 # Install required software
 #RUN apt-fast install wget
 RUN apt-fast install gnupg
-RUN wget -O - http://debian.drdteam.org/drdteam.gpg | apt-key add -
+RUN wget -qO- http://debian.drdteam.org/drdteam.gpg | apt-key add -
 RUN apt-add-repository 'deb http://debian.drdteam.org stable multiverse'
 RUN apt-fast update
 #ARG SERVER
