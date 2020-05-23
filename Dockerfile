@@ -1,5 +1,5 @@
 #FROM ubuntu:16.04
-FROM innovanon/poobuntu-16.04:latest
+FROM innovanon/poobuntu:latest
 #FROM innovanon/poobuntu:16.04
 MAINTAINER Innovations Anonymous <InnovAnon-Inc@protonmail.com>
 
@@ -15,16 +15,24 @@ LABEL org.label-schema.vcs-type="Git"
 LABEL org.label-schema.vcs-url="https://github.com/InnovAnon-Inc/docker-doom"
 
 # Install required software
-RUN apt-fast install wget
-RUN wget -O - http://debian.drdteam.org/drdteam.gpg | apt-key add -
-RUN apt-add-repository 'deb http://debian.drdteam.org stable multiverse'
-RUN apt-fast update
+#RUN apt-fast install wget
+#RUN wget -O - http://debian.drdteam.org/drdteam.gpg | apt-key add -
+#RUN apt-add-repository 'deb http://debian.drdteam.org stable multiverse'
+#RUN apt-fast update
 #ARG SERVER
 #ENV SERVER ${SERVER}
-ARG MODE
-ENV MODE ${MODE}
+#ARG MODE
+#ENV MODE ${MODE}
 #RUN apt-fast install --yes --quiet libssl1.0.0 libsdl-image1.2 zandronum
 #RUN apt-fast install doomsday-server doomsday
+
+RUN dpkg --add-architecture i386
+RUN apt update
+RUN apt install libc6-i386 libstdc++6:i386
+RUN wget -qO- http://downloads.zdaemon.org/zserv11012_linux26.tgz | tar xf zdaemon
+RUN ls zdaemon
+RUN exit 2
+
 RUN if [ "${MODE}" = server ] ; then  \
   apt-fast install zandronum-server ; \
 elif   [ "${MODE}" = client ] ; then  \
