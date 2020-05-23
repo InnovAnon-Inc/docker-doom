@@ -43,7 +43,7 @@ fi
 
 # Create a non-privileged user
 RUN useradd -ms /bin/bash zandronum
-RUN usermod -a -G audio   zandronum
+RUN [ "${MODE}" = server ] || usermod -a -G audio zandronum
 
 # brutalize
 RUN mkdir -vp /home/zandronum/.config/zandronum
