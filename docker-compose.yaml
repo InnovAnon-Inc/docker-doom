@@ -24,6 +24,7 @@ services:
       - doom-net
 
   doom-client:
+    privileged: true
     build:
       context: .
       args:
@@ -39,7 +40,14 @@ services:
     devices:
       #- "/dev/snd/by-path/pci-0000{{:}}00{{:}}1b.0:/dev/snd"
       #- "/dev/snd/by-path/pci-0000:00:1b.0":"/dev/snd"
-      - '/dev/snd/by-path/pci-0000:00:1b.0':'/dev/snd'
+      #- '/dev/snd/by-path/pci-0000:00:1b.0':'/dev/snd'
+      #- "/dev/snd/by-path/pci-0000{:}00{:}1b.0:/dev/snd"
+      #- '/dev/snd/by-path/pci-0000{:}00{:}1b.0:/dev/snd'
+      #- '/dev/snd/by-path/pci-0000&#58;00&#58;1b.0:/dev/snd'
+      #- "/dev/snd/by-path/pci-0000&#58;00&#58;1b.0:/dev/snd"
+      #- "./snd:/dev/snd"
+      #- /dev/snd/by-path/pci-0000::00::1f.3:/dev/snd
+      - "/dev/snd/controlC0:/dev/snd"
     #networks:
     #  - doom-net
     network_mode: "host"

@@ -29,7 +29,8 @@ RUN if [ "${MODE}" = server ] ; then  \
   apt-fast install zandronum-server ; \
 elif   [ "${MODE}" = client ] ; then  \
   apt-fast install zandronum          \
-    libgtk2.0-0 libglu1-mesa        ; \
+    libgtk2.0-0 libglu1-mesa          \
+    libcanberra-gtk-module          ; \
 else exit 2                         ; \
 fi
 
