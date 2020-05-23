@@ -36,7 +36,8 @@ services:
       - abaddonvol:/home/zandronum/abaddon:ro
       - wadsvol:/home/zandronum/wads:ro
       - ./config/default.cfg:/home/zandronum/config/default.cfg:ro
-      - doom-logs:/home/zandronum/log/:rw
+      - clientcfg:/home/zandronum/.config/zandronum:rw
+      #- doom-logs:/home/zandronum/log/:rw
       # TODO
       #- /tmp/.X11-unix:/tmp/.X11-unix:ro 
       #- /etc/localtime:/etc/localtime:ro
@@ -76,6 +77,7 @@ volumes:
     external: true
   wadsvol:
     external: true
+  clientcfg:
 
 networks:
   zandro-net:

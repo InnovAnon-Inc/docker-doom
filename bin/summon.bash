@@ -18,6 +18,8 @@ else
   FILE=
 fi
 
+#[ "$1" != client ] || rm -v .config/zandronum/*
+
 $ZANDRONUM                                         \
   -iwad /home/zandronum/wads/freedoom2.wad         \
   -waddir /home/zandronum/abaddon/wads             \

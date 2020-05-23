@@ -45,10 +45,6 @@ RUN useradd -ms /bin/bash zandronum
 RUN [ "${MODE}" != client ] || usermod -a -G audio zandronum
 RUN [ "${MODE}" != client ] || usermod -a -G video zandronum
 
-# brutalize
-RUN mkdir -vp /home/zandronum/.config/zandronum
-#RUN wget -O   /home/zandronum/.config/zandronum/project_brutality.pk3 https://github.com/pa1nki113r/Project_Brutality/archive/master.zip
-
 # new
 #RUN apt-fast install libfluidsynth1 fluid-soundfont-gm fluid-soundfont-gs
 RUN ./poobuntu-clean.sh
@@ -62,10 +58,12 @@ RUN chmod -v +x         /home/zandronum/bin/summon.sh
 
 USER zandronum
 WORKDIR /home/zandronum
+RUN mkdir -vp .config/zandronum
 
 #CMD        ["/home/zandronum/bin/summon.sh", ${MODE}]
 #ENTRYPOINT ["/home/zandronum/bin/summon.sh", ${MODE}]
 CMD        /home/zandronum/bin/summon.sh ${MODE} zandronum
 ENTRYPOINT /home/zandronum/bin/summon.sh ${MODE} zandronum
+# TODO only expose the server
 EXPOSE 10667/udp
 
