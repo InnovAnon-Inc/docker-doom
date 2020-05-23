@@ -37,6 +37,8 @@ services:
       - wadsvol:/home/zandronum/wads:ro
       - ./config/default.cfg:/home/zandronum/config/default.cfg:ro
       - doom-logs:/home/zandronum/log/:rw
+      #- /tmp/.X11-unix:/tmp/.X11-unix:ro 
+      #- /etc/localtime:/etc/localtime:ro
     devices:
       #- "/dev/snd/by-path/pci-0000{{:}}00{{:}}1b.0:/dev/snd"
       #- "/dev/snd/by-path/pci-0000:00:1b.0":"/dev/snd"

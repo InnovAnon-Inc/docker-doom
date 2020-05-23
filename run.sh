@@ -11,6 +11,7 @@ docker push innovanon/docker-zandronum:latest || :
 
 trap 'docker-compose down' 0
 
+xhost +local:`whoami`
 sudo             -- \
 nice -n -20      -- \
 sudo -u `whoami` -- \
