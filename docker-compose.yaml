@@ -1,15 +1,15 @@
 version: '3.3'
 services:
-  zandronum-server:
+  doomsday-server:
     #build: .
     build:
       context: .
       args:
         - MODE=server
-    hostname: zandronum-server
+    hostname: doomsday-server
     restart: unless-stopped
     volumes:
-      #- ./iwad/freedoom2.wad:/home/zandronum/.config/zandronum/freedoom2.wad:ro
+      #- ./iwad/freedoom2.wad:/home/zandronum/.config/doomsday/freedoom2.wad:ro
       - abaddonvol:/home/zandronum/abaddon:ro
       - wadsvol:/home/zandronum/wads:ro
       - ./player/whitelist.txt:/home/zandronum/player/whitelist.txt:ro
@@ -18,24 +18,24 @@ services:
       - ./config/default.cfg:/home/zandronum/config/default.cfg:ro
       - doom-logs:/home/zandronum/log/:rw
     ports:
-      - 10667:10667/udp
+      - 10668:10668/udp
     networks:
-      - zandro-net
+      - doomsday-net
     environment:
       - MODE=server
-    image: innovanon/docker-zandronum-server:latest
-    container_name: innovanon/docker-zandronum-server
+    image: innovanon/docker-doomsday-server:latest
+    container_name: docker-doomsday-server
 
-  zandronum-client:
+  doomsday-client:
     privileged: true
     #build: .
     build:
       context: .
       args:
         - MODE=client
-    hostname: zandronum-client
+    hostname: doomsday-client
     volumes:
-      #- ./iwad/freedoom2.wad:/home/zandronum/.config/zandronum/freedoom2.wad:ro
+      #- ./iwad/freedoom2.wad:/home/zandronum/.config/doomsday/freedoom2.wad:ro
       - abaddonvol:/home/zandronum/abaddon:ro
       - wadsvol:/home/zandronum/wads:ro
       - ./config/default.cfg:/home/zandronum/config/default.cfg:ro
@@ -62,14 +62,14 @@ services:
       - "/dev/snd"
     # TODO segfault Address: 0x38
     networks:
-      - zandro-net
+      - doomsday-net
     #network_mode: "host"
     environment:
       - DISPLAY=${DISPLAY}
       - XAUTHORITY
       - MODE=client
-    image: innovanon/docker-zandronum-client:latest
-    container_name: innovanon/docker-zandronum-client
+    image: innovanon/docker-doomsday-client:latest
+    container_name: docker-doomsday-client
 
 volumes:
   doom-logs:
@@ -80,8 +80,8 @@ volumes:
   clientcfg:
 
 networks:
-  zandro-net:
+  doomsday-net:
     ipam:
       config:
-      - subnet: 192.168.166.0/24
+      - subnet: 192.168.033.0/24
 
