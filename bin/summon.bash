@@ -1,9 +1,9 @@
 #! /bin/bash
 set -exu
-[ $# -eq 2 ]
-if   [ $1 = server ] ; then
+[[ $# -eq 2 ]]
+if   [[ $1 = server ]] ; then
   ZANDRONUM="$2-server -host -port 10667"
-elif [ $1 = client ] ; then
+elif [[ $1 = client ]] ; then
   ZANDRONUM="$2 localhost:10667"
 else exit 1 ; fi
 
@@ -18,13 +18,14 @@ else
   FILE=
 fi
 
-#[ "$1" != client ] || rm -fv .config/zandronum/*
+#[[ "$1" != client ]] || rm -fv .config/zandronum/*
+#  -file /home/zandronum/wads/Project_Brutality.pk3 \
 
 $ZANDRONUM                                         \
   -iwad /home/zandronum/wads/freedoom2.wad         \
   -waddir /home/zandronum/abaddon/wads             \
+  -file /home/zandronum/wads/bd_be.pk3             \
   -file /home/zandronum/wads/rainbow_blood.pk3     \
-  -file /home/zandronum/wads/Project_Brutality.pk3 \
   $FILE                                            \
   +exec "/home/zandronum/config/default.cfg"
 

@@ -1,6 +1,6 @@
 #! /bin/bash
 set -exu
-[ $# -eq 0 ]
+[[ $# -eq 0 ]]
 
 sudo             -- \
 nice -n +20      -- \

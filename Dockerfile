@@ -14,18 +14,21 @@ LABEL version="1.0"                                                     \
       org.label-schema.vcs-type="Git"                                   \
       org.label-schema.vcs-url="https://github.com/InnovAnon-Inc/docker-doom"
 
-ARG MODE
-ENV MODE=${MODE}
 #RUN apt-fast install --yes --quiet libssl1.0.0 libsdl-image1.2 zandronum
 #RUN apt-fast install doomsday-server doomsday
 # TODO test last 2 pkgs
 #    libsdl1.2debian libglew1.5
 #RUN apt-fast install libfluidsynth1 fluid-soundfont-gm fluid-soundfont-gs
 
+#ARG MODE
+#ENV MODE
+#ENV MODE=${MODE}
+ARG MODE
+
 # Install required software
 #RUN apt-fast install wget
 RUN apt-fast install gnupg                                               \
- && wget -qO- http://debian.drdteam.org/drdteam.gpg | apt-key add -      \
+ && pcurl http://debian.drdteam.org/drdteam.gpg | apt-key add -          \
  && apt-add-repository 'deb http://debian.drdteam.org stable multiverse' \
  && apt-fast update                                                      \
  && if [ "${MODE}" = server ] ; then  \
