@@ -42,7 +42,7 @@ services:
       - /etc/localtime:/etc/localtime:rw
     devices:
       # old
-      - "/dev/snd/controlC0:/dev/snd"
+      #- "/dev/snd/controlC0:/dev/snd"
       # new
       #- "/dev/snd/controlC0:/dev/snd/controlC0"
       #- "/dev/snd/hwC0D0:/dev/snd/hwC0D0"
@@ -52,6 +52,8 @@ services:
       #- "/dev/snd/pcmC0D2p:/dev/snd/pcmC0D2p"
       #- "/dev/snd/seq:/dev/snd/seq"
       #- "/dev/snd/timer:/dev/snd/timer"
+      # newer
+      - "/dev/snd"
     # TODO segfault Address: 0x38
     networks:
       - zandro-net

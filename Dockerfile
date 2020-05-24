@@ -38,7 +38,7 @@ else exit 2                         ; \
 fi \
  \
 &&  useradd -ms /bin/bash zandronum   \
-&&  if [ "${MODE}" != client ] ; then \
+&&  if [ "${MODE}" = client ] ; then  \
       usermod -a -G audio zandronum   \
    && usermod -a -G video zandronum ; \
     fi \
