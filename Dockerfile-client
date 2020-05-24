@@ -1,0 +1,35 @@
+FROM innovanon/docker-wine:latest
+MAINTAINER Innovations Anonymous <InnovAnon-Inc@protonmail.com>
+
+LABEL version="1.0"                                                     \
+      maintainer="Innovations Anonymous <InnovAnon-Inc@protonmail.com>" \
+      about="docker doom server and client"                             \
+      org.label-schema.build-date=$BUILD_DATE                           \
+      org.label-schema.license="PDL (Public Domain License)"            \
+      org.label-schema.name="docker-doom"                               \
+      org.label-schema.url="InnovAnon-Inc.github.io/docker-doom"        \
+      org.label-schema.vcs-ref=$VCS_REF                                 \
+      org.label-schema.vcs-type="Git"                                   \
+      org.label-schema.vcs-url="https://github.com/InnovAnon-Inc/docker-doom"
+
+# Add start-up script
+#COPY ./bin/GeoIP.dat   /home/wine-user/GeoIP.dat
+COPY ./bin/summon.bash /home/wine-user/bin/summon.sh
+
+RUN chown -vR wine-user /home/wine-user/bin
+RUN chmod -v +x         /home/wine-user/bin/summon.sh
+
+USER wine-user
+WORKDIR /home/wine-user
+
+# Install required software
+RUN wget -q http://downloads.zdaemon.org/zdaemon11012-setup.exe
+RUN wine zdaemon11012-setup.exe
+
+# TODO uncomment or add it to parent image
+#RUN ./poobuntu-clean.sh
+
+#CMD        /home/wine-user/bin/summon.sh
+#ENTRYPOINT vglrun bin/summon.sh ${MODE}
+ENTRYPOINT ["/home/wine-user/bin/summon.sh", "client"]
+

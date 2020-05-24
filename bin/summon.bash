@@ -1,12 +1,16 @@
 #! /bin/bash
 set -exu
-
+[ $# -eq 1 ]
+if   [ "$1" = server ] ; then
 ZANDRONUM="$PWD/zserv -host -port 106666"
+elif [ "$1" = client ] ; then
+ZANDRONUM="$PWD/zdaemon localhost:10667"
 
-DIR=/home/zandronum/abaddon/wads
+#wine zdaemon11012-setup.exe
+#else exit 1 ; fi
 
 # https://stackoverflow.com/questions/1015678/get-most-recent-file-in-a-directory-on-linux
-eval "files=($(ls -t --quoting-style=shell-always $DIR))"
+eval "files=($(ls -t --quoting-style=shell-always /home/zandronum/abaddon/wads))"
 if ((${#files[@]} > 0)) ; then
   FILE="`printf '%s\n' "${files[0]}"`"
   cp -v /home/zandronum/abaddon/wads/$FILE .
@@ -14,8 +18,6 @@ if ((${#files[@]} > 0)) ; then
 else
   FILE=
 fi
-# TODO fix Abaddon or docker-doom
-#      or whatever is breaking the awesome generated maps :'(
 
 cp -v /home/zandronum/wads/freedoom2.wad doom2.wad
 cp -v /home/zandronum/wads/Project_Brutality.pk3 \

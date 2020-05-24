@@ -1,13 +1,13 @@
 version: '3'
 services:
-  doom:
+  zdaemon-server:
     #build: .
     build:
       context: .
       args:
         - MODE=server
         - SERVER=zdaemon
-    hostname: doom
+    hostname: zdaemon-server
     restart: unless-stopped
     volumes:
       #- ./iwad/freedoom2.wad:/home/zandronum/.config/zandronum/freedoom2.wad:ro
@@ -20,41 +20,54 @@ services:
       - ./config/bots.cfg:/home/zandronum/config/bots.cfg:ro
       - doom-logs:/home/zandronum/log/:rw
     ports:
-      - 10666:10666
+      - 10666:10666/udp
     networks:
-      - doom-net
+      - zdaemon-net
 
-#  doom-client:
-#    build:
-#      context: .
-#      args:
-#        - MODE=client
-#        - SERVER=zdaemon
-#    hostname: doom-client
-#    volumes:
-#      #- ./iwad/freedoom2.wad:/home/zandronum/.config/zandronum/freedoom2.wad:ro
-#      - abaddonvol:/home/zandronum/abaddon:ro
-#      - wadsvol:/home/zandronum/wads:ro
-#      - ./config/zserv.cfg:/home/zandronum/config/zserv.cfg:ro
-#      - ./config/bots.cfg:/home/zandronum/config/bots.cfg:ro
-#      - doom-logs:/home/zandronum/log/:rw
-#    #devices:
-#      #- "/dev/snd/controlC0:/dev/snd"
-#    #networks:
-#    #  - doom-net
-#    network_mode: "host"
-#    environment:
-#      - DISPLAY=${DISPLAY}
+  zdaemon-client:
+    privileged: true
+    build:
+      context: .
+      dockerfile: ./Dockerfile-client
+      args:
+        - MODE=client
+        - SERVER=zdaemon
+    hostname: zdaemon-client
+    volumes:
+      #- ./iwad/freedoom2.wad:/home/zandronum/.config/zandronum/freedoom2.wad:ro
+      - abaddonvol:/home/zandronum/abaddon:ro
+      - wadsvol:/home/zandronum/wads:ro
+      - ./config/zserv.cfg:/home/zandronum/config/zserv.cfg:ro
+      - ./config/bots.cfg:/home/zandronum/config/bots.cfg:ro
+      #- doom-logs:/home/zandronum/log/:rw
+      - winevol:/home/zandronum/wine/:rw
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /etc/localtime:/etc/localtime:rw
+    devices:
+      - "/dev/snd/controlC0:/dev/snd"
+      - "/dev/snd/hwC0D0:/dev/snd/hwC0D0"
+      - "/dev/snd/pcmC0D0c:/dev/snd/pcmC0D0c"
+      - "/dev/snd/pcmC0D0p:/dev/snd/pcmC0D0p"
+      - "/dev/snd/pcmC0D2c:/dev/snd/pcmC0D2c"
+      - "/dev/snd/pcmC0D2p:/dev/snd/pcmC0D2p"
+      - "/dev/snd/seq:/dev/snd/seq"
+      - "/dev/snd/timer:/dev/snd/timer"
+    networks:
+      - zdaemon-net
+    #network_mode: "host"
+    environment:
+      - DISPLAY=${DISPLAY}
 
 volumes:
   doom-logs:
+  winevol:
   abaddonvol:
     external: true
   wadsvol:
     external: true
 
 networks:
-  doom-net:
+  zdaemon-net:
     ipam:
       config:
       - subnet: 192.168.66.0/24
