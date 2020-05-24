@@ -4,11 +4,15 @@ A Zandronum server configuration and deployment tool utilizing a Docker-based ba
 
 ## New Usage
 
-`(git clone --depth=1 {https://github.com/InnovAnon-Inc,..}/poobuntu && cd ../poobuntu && ./run.sh 18.04 && ./run.sh 16.04)`
+`(git clone --depth=1 {https://github.com/InnovAnon-Inc,..}/poobuntu    && cd ../poobuntu     && ./run.sh 18.04 && ./run.sh 16.04)`
 
-`(git clone --depth=1 {https://github.com/InnovAnon-Inc,..}/Abaddon  && cd ../Abaddon  && ./run.sh)`
+`(git clone --depth=1 {https://github.com/InnovAnon-Inc,..}/Abaddon     && cd ../Abaddon      && ./run.sh)`
+
+`(git clone --depth=1 {https://github.com/InnovAnon-Inc,..}/docker-wads && cd ../docker-wads  && ./run.sh)`
 
 `./run.sh`
+
+sound won't work if another app is using sound, apparently
 
 ## N.B.,
 

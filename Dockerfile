@@ -1,60 +1,56 @@
-#FROM innovanon/poobuntu-16.04:latest
 FROM innovanon/poobuntu-18.04:latest
 # missing libcrypto.so.1.0.0 from libssl.1.0.0 ?
 #FROM innovanon/poobuntu:latest
 MAINTAINER Innovations Anonymous <InnovAnon-Inc@protonmail.com>
 
-LABEL version="1.0"
-LABEL maintainer="Innovations Anonymous <InnovAnon-Inc@protonmail.com>"
-LABEL about="docker doom server and client"
-LABEL org.label-schema.build-date=$BUILD_DATE
-LABEL org.label-schema.license="PDL (Public Domain License)"
-LABEL org.label-schema.name="docker-doom"
-LABEL org.label-schema.url="InnovAnon-Inc.github.io/docker-doom"
-LABEL org.label-schema.vcs-ref=$VCS_REF
-LABEL org.label-schema.vcs-type="Git"
-LABEL org.label-schema.vcs-url="https://github.com/InnovAnon-Inc/docker-doom"
+LABEL version="1.0"                                                     \
+      maintainer="Innovations Anonymous <InnovAnon-Inc@protonmail.com>" \
+      about="docker doom server and client"                             \
+      org.label-schema.build-date=$BUILD_DATE                           \
+      org.label-schema.license="PDL (Public Domain License)"            \
+      org.label-schema.name="docker-doom"                               \
+      org.label-schema.url="InnovAnon-Inc.github.io/docker-doom"        \
+      org.label-schema.vcs-ref=$VCS_REF                                 \
+      org.label-schema.vcs-type="Git"                                   \
+      org.label-schema.vcs-url="https://github.com/InnovAnon-Inc/docker-doom"
 
-# Install required software
-#RUN apt-fast install wget
-RUN apt-fast install gnupg
-RUN wget -qO- http://debian.drdteam.org/drdteam.gpg | apt-key add -
-RUN apt-add-repository 'deb http://debian.drdteam.org stable multiverse'
-RUN apt-fast update
-#ARG SERVER
-#ENV SERVER ${SERVER}
 ARG MODE
 ENV MODE=${MODE}
 #RUN apt-fast install --yes --quiet libssl1.0.0 libsdl-image1.2 zandronum
 #RUN apt-fast install doomsday-server doomsday
-RUN if [ "${MODE}" = server ] ; then  \
+# TODO test last 2 pkgs
+#    libsdl1.2debian libglew1.5
+#RUN apt-fast install libfluidsynth1 fluid-soundfont-gm fluid-soundfont-gs
+
+# Install required software
+#RUN apt-fast install wget
+RUN apt-fast install gnupg                                               \
+ && wget -qO- http://debian.drdteam.org/drdteam.gpg | apt-key add -      \
+ && apt-add-repository 'deb http://debian.drdteam.org stable multiverse' \
+ && apt-fast update                                                      \
+ && if [ "${MODE}" = server ] ; then  \
   apt-fast install zandronum-server ; \
 elif   [ "${MODE}" = client ] ; then  \
   apt-fast install zandronum          \
     libgtk2.0-0 libglu1-mesa          \
     libcanberra-gtk-module          ; \
 else exit 2                         ; \
-fi
-  # TODO test last 2 pkgs
-#    libsdl1.2debian libglew1.5
-
-#RUN [ ${MODE} = server ] || [ ${MODE} = client ]
-
-# Create a non-privileged user
-RUN useradd -ms /bin/bash zandronum
-RUN [ "${MODE}" != client ] || usermod -a -G audio zandronum
-RUN [ "${MODE}" != client ] || usermod -a -G video zandronum
-
-# new
-#RUN apt-fast install libfluidsynth1 fluid-soundfont-gm fluid-soundfont-gs
-RUN ./poobuntu-clean.sh
+fi \
+ \
+&&  useradd -ms /bin/bash zandronum   \
+&&  if [ "${MODE}" != client ] ; then \
+      usermod -a -G audio zandronum   \
+   && usermod -a -G video zandronum ; \
+    fi \
+ \
+&& ./poobuntu-clean.sh
 
 # Add start-up script
 COPY ./bin/GeoIP.dat   /home/zandronum/GeoIP.dat
 COPY ./bin/summon.bash /home/zandronum/bin/summon.sh
 
-RUN chown -vR zandronum /home/zandronum/bin
-RUN chmod -v +x         /home/zandronum/bin/summon.sh
+RUN chown -vR zandronum /home/zandronum/bin \
+ && chmod -v +x         /home/zandronum/bin/summon.sh
 
 USER zandronum
 WORKDIR /home/zandronum

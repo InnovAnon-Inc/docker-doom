@@ -1,0 +1,75 @@
+version: '3'
+services:
+  zandronum-server:
+    #build: .
+    build:
+      context: .
+      args:
+        - MODE=server
+    hostname: zandronum-server
+    restart: unless-stopped
+    volumes:
+      #- ./iwad/freedoom2.wad:/home/zandronum/.config/zandronum/freedoom2.wad:ro
+      - abaddonvol:/home/zandronum/abaddon:ro
+      - wadsvol:/home/zandronum/wads:ro
+      - ./player/whitelist.txt:/home/zandronum/player/whitelist.txt:ro
+      - ./player/banlist.txt:/home/zandronum/player/banlist.txt:rw
+      - ./player/adminlist.txt:/home/zandronum/player/adminlist.txt:ro
+      - ./config/default.cfg:/home/zandronum/config/default.cfg:ro
+      - doom-logs:/home/zandronum/log/:rw
+    ports:
+      - 10667:10667/udp
+    networks:
+      - zandro-net
+
+  zandronum-client:
+    privileged: true
+    build:
+      context: .
+      args:
+        - MODE=client
+    hostname: zandronum-client
+    volumes:
+      #- ./iwad/freedoom2.wad:/home/zandronum/.config/zandronum/freedoom2.wad:ro
+      - abaddonvol:/home/zandronum/abaddon:ro
+      - wadsvol:/home/zandronum/wads:ro
+      - ./config/default.cfg:/home/zandronum/config/default.cfg:ro
+      #- doom-logs:/home/zandronum/log/:rw
+      # TODO
+      #- /tmp/.X11-unix:/tmp/.X11-unix:ro 
+      #- /etc/localtime:/etc/localtime:ro
+      #- /tmp/.X11-unix:/tmp/.X11-unix:rw 
+      #- /etc/localtime:/etc/localtime:rw
+    devices:
+      # old
+      #- "/dev/snd/controlC0:/dev/snd"
+      # new
+      - "/dev/snd/controlC0:/dev/snd/controlC0"
+      - "/dev/snd/hwC0D0:/dev/snd/hwC0D0"
+      - "/dev/snd/pcmC0D0c:/dev/snd/pcmC0D0c"
+      - "/dev/snd/pcmC0D0p:/dev/snd/pcmC0D0p"
+      - "/dev/snd/pcmC0D2c:/dev/snd/pcmC0D2c"
+      - "/dev/snd/pcmC0D2p:/dev/snd/pcmC0D2p"
+      - "/dev/snd/seq:/dev/snd/seq"
+      - "/dev/snd/timer:/dev/snd/timer"
+    # TODO segfault Address: 0x38
+    #networks:
+    #  - zandro-net
+    network_mode: "host"
+    environment:
+      - DISPLAY=${DISPLAY}
+
+volumes:
+  doom-logs:
+  abaddonvol:
+    external: true
+  wadsvol:
+    external: true
+  clientcfg:
+
+networks:
+  zandro-net:
+    ipam:
+      config:
+      - subnet: 192.168.166.0/24
+
