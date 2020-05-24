@@ -1,0 +1,9 @@
+#! /usr/bin/env sh
+
+echo "------ HOOK START - BUILD -------"
+#printenv
+
+docker build --build-arg $MODE -t $IMAGE_NAME .
+
+echo "------ HOOK END - BUILD -------"
+

@@ -1,6 +1,7 @@
 FROM innovanon/poobuntu-18.04:latest
 # missing libcrypto.so.1.0.0 from libssl.1.0.0 ?
 #FROM innovanon/poobuntu:latest
+ARG MODE
 MAINTAINER Innovations Anonymous <InnovAnon-Inc@protonmail.com>
 
 LABEL version="1.0"                                                     \
@@ -23,7 +24,7 @@ LABEL version="1.0"                                                     \
 #ARG MODE
 #ENV MODE
 #ENV MODE=${MODE}
-ARG MODE
+#ARG MODE
 
 # Install required software
 #RUN apt-fast install wget

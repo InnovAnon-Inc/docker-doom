@@ -1,4 +1,4 @@
-version: '3'
+version: '3.3'
 services:
   zandronum-server:
     #build: .
@@ -23,6 +23,7 @@ services:
       - zandro-net
     environment:
       - MODE=server
+    image: innovanon/docker-zandronum-server:latest
 
   zandronum-client:
     privileged: true
@@ -66,6 +67,7 @@ services:
       - DISPLAY=${DISPLAY}
       - XAUTHORITY
       - MODE=client
+    image: innovanon/docker-zandronum-client:latest
 
 volumes:
   doom-logs:
