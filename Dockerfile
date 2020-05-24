@@ -24,7 +24,7 @@ RUN apt-fast update
 #ARG SERVER
 #ENV SERVER ${SERVER}
 ARG MODE
-ENV MODE ${MODE}
+ENV MODE=${MODE}
 #RUN apt-fast install --yes --quiet libssl1.0.0 libsdl-image1.2 zandronum
 #RUN apt-fast install doomsday-server doomsday
 RUN if [ "${MODE}" = server ] ; then  \

@@ -18,12 +18,13 @@ else
   FILE=
 fi
 
-#[ "$1" != client ] || rm -v .config/zandronum/*
+#[ "$1" != client ] || rm -fv .config/zandronum/*
 
 $ZANDRONUM                                         \
   -iwad /home/zandronum/wads/freedoom2.wad         \
   -waddir /home/zandronum/abaddon/wads             \
   -file /home/zandronum/wads/Project_Brutality.pk3 \
+  -file /home/zandronum/wads/rainbow_blood.pk3     \
   $FILE                                            \
   +exec "/home/zandronum/config/default.cfg"
 
