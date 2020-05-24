@@ -18,7 +18,7 @@ cat > update_winetricks <<_EOF_SCRIPT
 cd "\$(mktemp -d)"
 
 # Download the latest winetricks script (master="latest version") from Github.
-wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
+pcurl https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks winetricks
 
 # Mark the winetricks script (we've just downloaded) as executable. See:
 #   https://www.tldp.org/LDP/GNU-Linux-Tools-Summary/html/x9543.htm
@@ -29,7 +29,7 @@ chmod +x winetricks
 sudo mv winetricks /usr/bin
 
 # Download the latest winetricks BASH completion script (master="latest version") from Github.
-wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks.bash-completion
+pcurl https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks.bash-completion winetricks.bash-completion
 
 # Move the winetricks BASH completion script to a standard location for BASH completion modules. See:
 #   https://www.tldp.org/LDP/abs/html/tabexpansion.html

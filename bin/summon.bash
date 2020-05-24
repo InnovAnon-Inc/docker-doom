@@ -1,9 +1,9 @@
 #! /bin/bash
 set -exu
-[ $# -eq 1 ]
-if   [ "$1" = server ] ; then
+[[ $# -eq 1 ]]
+if   [[ "$1" = server ]] ; then
 ZANDRONUM="$PWD/zserv -host -port 106666"
-elif [ "$1" = client ] ; then
+elif [[ "$1" = client ]] ; then
 ZANDRONUM="$PWD/zdaemon localhost:10667"
 
 #wine zdaemon11012-setup.exe

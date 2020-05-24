@@ -23,8 +23,8 @@ USER wine-user
 WORKDIR /home/wine-user
 
 # Install required software
-RUN wget -q http://downloads.zdaemon.org/zdaemon11012-setup.exe
-RUN wine zdaemon11012-setup.exe
+RUN pcurl http://downloads.zdaemon.org/zdaemon11012-setup.exe zdaemon-setup.exe
+RUN wine zdaemon-setup.exe
 
 # TODO uncomment or add it to parent image
 #RUN ./poobuntu-clean.sh

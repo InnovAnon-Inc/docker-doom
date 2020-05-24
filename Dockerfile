@@ -27,7 +27,7 @@ ENV MODE ${MODE}
 RUN dpkg --add-architecture i386
 RUN apt-fast update
 RUN apt-fast install libc6-i386 libstdc++6:i386
-RUN wget -qO- http://downloads.zdaemon.org/zserv11012_linux26.tgz | tar xzf -
+RUN pcurl http://downloads.zdaemon.org/zserv11012_linux26.tgz | tar xzf -
 
 #RUN if [ "${MODE}" = server ] ; then  \
 #  apt-fast install zandronum-server ; \

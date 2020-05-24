@@ -6,7 +6,6 @@ services:
       context: .
       args:
         - MODE=server
-        - SERVER=zdaemon
     hostname: zdaemon-server
     restart: unless-stopped
     volumes:
@@ -31,7 +30,6 @@ services:
       dockerfile: ./Dockerfile-client
       args:
         - MODE=client
-        - SERVER=zdaemon
     hostname: zdaemon-client
     volumes:
       #- ./iwad/freedoom2.wad:/home/zandronum/.config/zandronum/freedoom2.wad:ro
@@ -44,14 +42,7 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - /etc/localtime:/etc/localtime:rw
     devices:
-      - "/dev/snd/controlC0:/dev/snd"
-      - "/dev/snd/hwC0D0:/dev/snd/hwC0D0"
-      - "/dev/snd/pcmC0D0c:/dev/snd/pcmC0D0c"
-      - "/dev/snd/pcmC0D0p:/dev/snd/pcmC0D0p"
-      - "/dev/snd/pcmC0D2c:/dev/snd/pcmC0D2c"
-      - "/dev/snd/pcmC0D2p:/dev/snd/pcmC0D2p"
-      - "/dev/snd/seq:/dev/snd/seq"
-      - "/dev/snd/timer:/dev/snd/timer"
+      - "/dev/snd"
     networks:
       - zdaemon-net
     #network_mode: "host"
