@@ -24,6 +24,7 @@ services:
     environment:
       - MODE=server
     image: innovanon/docker-zandronum-server:latest
+    container_name: innovanon/docker-zandronum-server
 
   zandronum-client:
     privileged: true
@@ -68,6 +69,7 @@ services:
       - XAUTHORITY
       - MODE=client
     image: innovanon/docker-zandronum-client:latest
+    container_name: innovanon/docker-zandronum-client
 
 volumes:
   doom-logs:
