@@ -20,7 +20,8 @@ services:
     ports:
       - 10668:10668/udp
     networks:
-      - doomsday-net
+      doomsday-net:
+        ipv4_address: 192.168.33.10
     environment:
       - MODE=server
     image: innovanon/docker-doomsday-server:latest
@@ -83,5 +84,5 @@ networks:
   doomsday-net:
     ipam:
       config:
-      - subnet: 192.168.033.0/24
+      - subnet: 192.168.33.0/24
 

@@ -4,7 +4,7 @@ set -exu
 if   [[ $1 = server ]] ; then
   ZANDRONUM="$2-server -host -port 10668"
 elif [[ $1 = client ]] ; then
-  ZANDRONUM="$2 localhost:10668"
+  ZANDRONUM="$2 192.168.33.10:10668"
 else exit 1 ; fi
 
 PATH=/usr/games:$PATH
