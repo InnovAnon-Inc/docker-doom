@@ -20,11 +20,12 @@ services:
     ports:
       - 10667:10667/udp
     networks:
-      - zandro-net
+      zandro-net:
+        ipv4_address: 192.168.167.10
     environment:
       - MODE=server
     image: innovanon/docker-zandronum-server:latest
-    container_name: innovanon/docker-zandronum-server
+    container_name: docker-zandronum-server
 
   zandronum-client:
     privileged: true
@@ -69,7 +70,7 @@ services:
       - XAUTHORITY
       - MODE=client
     image: innovanon/docker-zandronum-client:latest
-    container_name: innovanon/docker-zandronum-client
+    container_name: docker-zandronum-client
 
 volumes:
   doom-logs:
@@ -83,5 +84,5 @@ networks:
   zandro-net:
     ipam:
       config:
-      - subnet: 192.168.166.0/24
+      - subnet: 192.168.167.0/24
 
