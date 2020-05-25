@@ -21,9 +21,10 @@ services:
     ports:
       - 10666:10666/udp
     networks:
-      - zdaemon-net
+      zdaemon-net:
+        ipv4_address: 192.168.66.10
     image: innovnanon/docker-zdaemon-server:latest
-    container_name: innovanon/docker-zdaemon-server
+    container_name: docker-zdaemon-server
 
   zdaemon-client:
     privileged: true
@@ -51,7 +52,7 @@ services:
     environment:
       - DISPLAY=${DISPLAY}
     image: innovanon/docker-zdaemon-client:latest
-    container_name: innovanon/docker-zdaemon-client
+    container_name: docker-zdaemon-client
 
 volumes:
   doom-logs:

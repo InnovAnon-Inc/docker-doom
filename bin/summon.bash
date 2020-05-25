@@ -4,7 +4,7 @@ set -exu
 if   [[ "$1" = server ]] ; then
 ZANDRONUM="$PWD/zserv -host -port 106666"
 elif [[ "$1" = client ]] ; then
-ZANDRONUM="$PWD/zdaemon localhost:10667"
+ZANDRONUM="$PWD/zdaemon 192.168.66.10:10667"
 
 #wine zdaemon11012-setup.exe
 #else exit 1 ; fi
