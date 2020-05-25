@@ -45,6 +45,7 @@ services:
       #- /tmp/.X11-unix:/tmp/.X11-unix:ro 
       #- /etc/localtime:/etc/localtime:ro
       - $XAUTHORITY:$XAUTHORITY
+      #- $XDG_RUNTIME_DIR:$XDG_RUNTIME_DIR
       - /tmp/.X11-unix:/tmp/.X11-unix:rw 
       - /etc/localtime:/etc/localtime:rw
     devices:
@@ -68,6 +69,7 @@ services:
     environment:
       - DISPLAY=${DISPLAY}
       - XAUTHORITY
+      - XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR}
       - MODE=client
     image: innovanon/docker-doomsday-client:latest
     container_name: docker-doomsday-client

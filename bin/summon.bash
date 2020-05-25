@@ -22,6 +22,9 @@ fi
 #  -file /home/zandronum/wads/Project_Brutality.pk3 \
 #  +exec "/home/zandronum/config/default.cfg"
 
+ldconfig -p | grep -i gl.so
+exit 2
+
 $ZANDRONUM                                         \
   -iwad /home/zandronum/wads/freedoom2.wad         \
   -waddir /home/zandronum/abaddon/wads             \
