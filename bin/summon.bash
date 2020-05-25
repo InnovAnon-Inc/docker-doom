@@ -20,6 +20,7 @@ fi
 
 #[[ "$1" != client ]] || rm -fv .config/zandronum/*
 #  -file /home/zandronum/wads/Project_Brutality.pk3 \
+#  +exec "/home/zandronum/config/default.cfg"
 
 $ZANDRONUM                                         \
   -iwad /home/zandronum/wads/freedoom2.wad         \
@@ -27,5 +28,4 @@ $ZANDRONUM                                         \
   -file /home/zandronum/wads/bd_be.pk3             \
   -file /home/zandronum/wads/rainbow_blood.pk3     \
   $FILE                                            \
-  +exec "/home/zandronum/config/default.cfg"
 
