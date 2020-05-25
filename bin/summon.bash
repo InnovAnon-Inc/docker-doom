@@ -23,6 +23,9 @@ fi
 #  +exec "/home/zandronum/config/default.cfg"
 
 ldconfig -p | grep -i gl.so
+ls -l /lib/x86_64-linux-gnu/libwayland-egl.so.1 \
+      /lib/x86_64-linux-gnu/libGL.so.1 \
+      /lib/x86_64-linux-gnu/libEGL.so.1
 exit 2
 
 $ZANDRONUM                                         \
