@@ -15,14 +15,14 @@ LABEL version="1.0"                                                     \
       org.label-schema.vcs-type="Git"                                   \
       org.label-schema.vcs-url="https://github.com/InnovAnon-Inc/docker-doom"
 
+#        libgtk2.0-0 libglu1-mesa          \
+#        libsdl1.2debian libglew2.1        \
+#        libssl1.1 libsdl-image1.2         \
+#        libglew2.1                      ; \
 RUN if [ "${MODE}" = server ] ; then      \
       apt-fast install doomsday-server  ; \
     elif   [ "${MODE}" = client ] ; then  \
-      apt-fast install doomsday           \
-        libgtk2.0-0 libglu1-mesa          \
-        libsdl1.2debian libglew2.1        \
-        libssl1.1 libsdl-image1.2         \
-        libglew2.1                      ; \
+      apt-fast install doomsday         ; \
     else exit 2                         ; \
     fi \
  \
@@ -30,9 +30,10 @@ RUN if [ "${MODE}" = server ] ; then      \
 &&  if [ "${MODE}" = client ] ; then  \
       usermod -a -G audio zandronum   \
    && usermod -a -G video zandronum ; \
-    fi \
- \
-&& ./poobuntu-clean.sh
+    fi
+#    fi \
+# \
+#&& ./poobuntu-clean.sh
 
 # Add start-up script
 COPY ./bin/GeoIP.dat   /home/zandronum/GeoIP.dat
