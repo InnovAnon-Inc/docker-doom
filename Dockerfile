@@ -20,7 +20,9 @@ RUN if [ "${MODE}" = server ] ; then      \
     elif   [ "${MODE}" = client ] ; then  \
       apt-fast install doomsday           \
         libgtk2.0-0 libglu1-mesa          \
-        libsdl1.2debian libglew2.1      ; \
+        libsdl1.2debian libglew2.1        \
+        libssl1.1 libsdl-image1.2         \
+        libglew2.1                      ; \
     else exit 2                         ; \
     fi \
  \
