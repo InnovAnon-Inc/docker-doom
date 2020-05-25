@@ -21,17 +21,21 @@ fi
 #[[ "$1" != client ]] || rm -fv .config/zandronum/*
 #  -file /home/zandronum/wads/Project_Brutality.pk3 \
 #  +exec "/home/zandronum/config/default.cfg"
-
-ldconfig -p | grep -i gl.so
-ls -l /lib/x86_64-linux-gnu/libwayland-egl.so.1 \
-      /lib/x86_64-linux-gnu/libGL.so.1 \
-      /lib/x86_64-linux-gnu/libEGL.so.1
+#[[ $1 = server ]] ||
+# TODO
+ubuntu-drivers autoinstall
+dpkg --get-selection|grep nvidia
 exit 2
+if [ ! `dpkg --get-selections | grep -q nvidia` ] ; then
+  apt-fast install nvidia-settings
+  nvidia-settings
+fi
 
-$ZANDRONUM                                         \
-  -iwad /home/zandronum/wads/freedoom2.wad         \
-  -waddir /home/zandronum/abaddon/wads             \
-  -file /home/zandronum/wads/bd_be.pk3             \
-  -file /home/zandronum/wads/rainbow_blood.pk3     \
-  $FILE                                            \
+cd /home/zandronum
+su zandronum --command "/usr/games/$ZANDRONUM  \
+  -iwad /home/zandronum/wads/freedoom2.wad     \
+  -waddir /home/zandronum/abaddon/wads         \
+  -file /home/zandronum/wads/bd_be.pk3         \
+  -file /home/zandronum/wads/rainbow_blood.pk3 \
+  $FILE"
 

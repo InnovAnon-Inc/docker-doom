@@ -35,6 +35,10 @@ RUN if [ "${MODE}" = server ] ; then      \
 # \
 #&& ./poobuntu-clean.sh
 
+#RUN [ "${MODE}" = server ] \
+#  || apt-fast install ubuntu-drivers-common
+RUN apt-fast install ubuntu-drivers-common
+
 # Add start-up script
 COPY ./bin/GeoIP.dat   /home/zandronum/GeoIP.dat
 COPY ./bin/summon.bash /home/zandronum/bin/summon.sh
@@ -47,6 +51,8 @@ WORKDIR /home/zandronum
 RUN mkdir -vp .config/doomsday
 
 #CMD        /home/zandronum/bin/summon.sh ${MODE}
+USER root
+
 ENTRYPOINT /home/zandronum/bin/summon.sh ${MODE} doomsday
 # TODO only expose the server
 EXPOSE 10667/udp
