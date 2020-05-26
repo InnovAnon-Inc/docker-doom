@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 set -exu
-[[ $# -eq 2 ]]
+(( $# == 2 ))
 if   [[ $1 = server ]] ; then
   ZANDRONUM="$2-server -host -port 10667"
 elif [[ $1 = client ]] ; then
