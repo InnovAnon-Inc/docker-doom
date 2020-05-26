@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 set -exu
 [[ $# -eq 1 ]]
 if   [[ "$1" = server ]] ; then
