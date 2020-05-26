@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 set -exu
 [[ $# -eq 2 ]]
 if   [[ $1 = server ]] ; then
@@ -24,10 +24,9 @@ fi
 #[[ $1 = server ]] ||
 # TODO
 ubuntu-drivers autoinstall
-dpkg --get-selection|grep nvidia
-exit 2
 if [ ! `dpkg --get-selections | grep -q nvidia` ] ; then
   apt-fast install nvidia-settings
+  mv -v /root/xorg.conf /etc/X11/xorg.conf
   nvidia-settings
 fi
 

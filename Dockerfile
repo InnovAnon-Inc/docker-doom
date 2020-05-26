@@ -52,6 +52,7 @@ RUN mkdir -vp .config/doomsday
 
 #CMD        /home/zandronum/bin/summon.sh ${MODE}
 USER root
+COPY xorg.conf /root/
 
 ENTRYPOINT /home/zandronum/bin/summon.sh ${MODE} doomsday
 # TODO only expose the server
