@@ -71,6 +71,8 @@ services:
       - MODE=client
     image: innovanon/docker-zandronum-client:latest
     container_name: docker-zandronum-client
+    depends_on:
+      - "zandronum-server"
 
 volumes:
   doom-logs:
