@@ -28,7 +28,8 @@ LABEL version="1.0"                                                     \
 
 # Install required software
 #RUN apt-fast install wget
-RUN apt-fast install gnupg                                               \
+RUN apt-fast update \
+ && apt-fast install gnupg                                               \
  && pcurl http://debian.drdteam.org/drdteam.gpg | apt-key add -          \
  && apt-add-repository 'deb http://debian.drdteam.org stable multiverse' \
  && apt-fast update                                                      \
