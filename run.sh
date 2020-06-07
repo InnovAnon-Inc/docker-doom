@@ -13,7 +13,7 @@ docker-compose build
 
 trap 'docker-compose down' 0
 
-xhost +local:"$USER"
+xhost +local:$USER || :
 sudo             -- \
 nice -n -20      -- \
 sudo -u "$USER" -- \
