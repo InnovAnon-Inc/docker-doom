@@ -30,7 +30,7 @@ LABEL version="1.0"                                                     \
 #RUN apt-fast install wget
 RUN apt-fast update \
  && apt-fast install gnupg                                               \
- && pcurl http://debian.drdteam.org/drdteam.gpg | apt-key add -          \
+ && curl http://debian.drdteam.org/drdteam.gpg | apt-key add -           \
  && apt-add-repository 'deb http://debian.drdteam.org stable multiverse' \
  && apt-fast update                                                      \
  && if [ "${MODE}" = server ] ; then  \
