@@ -19,7 +19,7 @@ docker-compose build
 
 trap 'docker-compose down' 0
 
-xhost +local:"$USER"
+xhost +local:"$USER" || :
 #XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR}                 \
 #sudo --preserve-env=XDG_RUNTIME_DIR             -- \
 #nice -n -20                                     -- \
