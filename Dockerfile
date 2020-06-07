@@ -15,6 +15,7 @@ LABEL version="1.0"                                                     \
       org.label-schema.vcs-type="Git"                                   \
       org.label-schema.vcs-url="https://github.com/InnovAnon-Inc/docker-doom"
 
+RUN apt-fast update
 #        libgtk2.0-0 libglu1-mesa          \
 #        libsdl1.2debian libglew2.1        \
 #        libssl1.1 libsdl-image1.2         \

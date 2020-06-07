@@ -6,7 +6,9 @@
 [![dockeri.co](https://dockeri.co/image/innovanon/docker-doomsday-client)](https://hub.docker.com/r/innovanon/docker-doomsday-client/)
 [![dockeri.co](https://dockeri.co/image/innovanon/docker-doomsday-server)](https://hub.docker.com/r/innovanon/docker-doomsday-server/)
 
-A Zandronum server configuration and deployment tool utilizing a Docker-based back-end.
+A Doomsday server configuration and deployment tool utilizing a Docker-based back-end.
+
+The client doesn't run in docker so far, and the client doesn't seem to support mouse move, so I'm dropping this.
 
 ## New Usage
 
